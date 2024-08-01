@@ -1,0 +1,26 @@
+---
+- name: Setup a PHP Application with Redis on a Virtual Machine
+  hosts: hng
+
+  vars_files:
+    - vars/main.yml
+
+  handlers:
+    - import_tasks: handlers/main.yml
+     
+  tasks:
+    - include_tasks: tasks/create_user.yml
+
+    - include_tasks: tasks/install_packages.yml
+
+    - include_tasks: tasks/setup_postgres.yml
+
+    - include_tasks: tasks/clone_repo.yml
+
+    - include_tasks: tasks/setup_composer.yml
+
+    - include_tasks: tasks/run_php.yml
+
+    - include_tasks: tasks/firewall.yml
+    
+    - include_tasks: tasks/setup_nginx.yml

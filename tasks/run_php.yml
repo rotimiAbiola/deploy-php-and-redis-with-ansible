@@ -1,0 +1,19 @@
+---
+- name: Run php artisan
+  shell: "{{item}} chdir={{ app_dir }}"
+  loop:
+    - php artisan key:generate --force
+    - php artisan config:cache
+    - php artisan config:clear
+
+- name: Run artisan migrate
+  become: true
+  shell: >
+    php artisan migrate:fresh --force
+    chdir="{{ app_dir }}"
+
+- name: Run seed migrate
+  become: true
+  shell: >
+    php artisan migrate --seed --force
+    chdir="{{ app_dir }}"

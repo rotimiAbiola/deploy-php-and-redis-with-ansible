@@ -1,0 +1,29 @@
+---
+- name: Configure Git to add /opt/stage_5b as a safe directory
+  command: git config --global --add safe.directory "{{ app_dir }}"
+
+- name: Clone the PHP project repo
+  git: 
+    repo: "{{ app_repo }}"
+    dest: "{{ app_dir }}"
+    single_branch: yes
+    version: "{{ repo_branch }}"
+    force: yes
+    update: yes
+
+- name: Change file ownership, group and permissions
+  file:
+    path: "{{ app_dir }}"
+    state: directory
+    recurse: true
+    owner: hng
+    group: hng
+    mode: '0755'
+  
+- name: Switch to the golang app directory
+  command: chdir="{{ app_dir }}" ls
+
+- name: copy .env file to the app directory
+  copy:
+    src: ./templates/env
+    dest: "{{ app_dir }}.env"

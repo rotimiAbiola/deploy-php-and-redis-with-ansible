@@ -1,0 +1,21 @@
+---
+- name: Download Composer installer
+  shell: curl -sS https://getcomposer.org/installer | php
+
+- name: Move composer into globally-accessible location
+  shell: >
+    mv composer.phar "{{ composer_path }}"
+    creates="{{ composer_path }}"
+
+- name: change permission setting for composer
+  shell: chmod +x "{{ composer_path }}"
+
+- name: Run composer update
+  shell: >
+    sudo composer update --no-interaction
+    chdir="{{ app_dir }}"
+
+- name: run composer installer
+  shell: >
+    composer install --no-interaction
+    chdir="{{ app_dir }}"
