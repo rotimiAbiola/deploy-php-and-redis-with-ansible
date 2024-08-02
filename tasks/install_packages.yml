@@ -7,7 +7,6 @@
     - ca-certificates
     - gnupg2
     - debconf-utils
-    - libaio1
 
 - name: Add ondrej repository for later versions of PHP
   apt_repository: repo='ppa:ondrej/php' update_cache=yes
@@ -19,7 +18,8 @@
     - libapache2-mod-php
     - php8.1-mysql
     - php8.1-common
-    - php8.1-mysql
+    - php8.1-pdo
+    - php8.1-pgsql
     - php8.1-xml
     - php8.1-xmlrpc
     - php8.1-curl
@@ -32,6 +32,7 @@
     - php8.1-opcache
     - php8.1-soap
     - php8.1-zip
+    - php8.1-dom
     - php8.1-intl
 
 - name: Install PostgreSQL and dependencies

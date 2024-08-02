@@ -10,10 +10,13 @@
   become: true
   shell: >
     php artisan migrate:fresh --force
-    chdir="{{ app_dir }}"
 
 - name: Run seed migrate
   become: true
   shell: >
     php artisan migrate --seed --force
-    chdir="{{ app_dir }}"
+
+- name: Run artisan serve
+  become: true
+  shell: >
+    php artisan serve
