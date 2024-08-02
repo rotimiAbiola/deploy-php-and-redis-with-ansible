@@ -10,14 +10,23 @@
 - name: Run artisan migrate
   shell: >
     php artisan migrate:fresh --force
-  become_user: hng
+    chdir="{{ app_dir }}"
+  register: migrate_result
+  failed_when: migrate_result.rc != 0 and "'already exists' not in migrate_result.stderr
+
+- name: Display artisan migrate result
+  debug:
+    var: migrate_result
 
 - name: Run seed migrate
   shell: >
     php artisan migrate --seed --force
+    chdir={{ app_dir }}
   become_user: hng
 
 - name: Run artisan serve
   shell: >
     php artisan serve
+    chdir={{ app_dir }}
   become_user: hng
+
