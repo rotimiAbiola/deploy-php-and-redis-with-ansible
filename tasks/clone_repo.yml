@@ -10,6 +10,14 @@
     version: "{{ repo_branch }}"
     force: yes
     update: yes
+    
+- name: Switch to the php app directory
+  command: chdir="{{ app_dir }}" ls
+
+- name: copy .env file to the app directory
+  copy:
+    src: ./templates/env
+    dest: "{{ app_dir }}.env"
 
 - name: Change file ownership, group and permissions
   file:
@@ -20,10 +28,3 @@
     group: hng
     mode: '0755'
   
-- name: Switch to the php app directory
-  command: chdir="{{ app_dir }}" ls
-
-- name: copy .env file to the app directory
-  copy:
-    src: ./templates/env
-    dest: "{{ app_dir }}.env"
