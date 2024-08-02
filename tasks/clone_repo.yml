@@ -1,6 +1,6 @@
 ---
 - name: Configure Git to add /opt/stage_5b as a safe directory
-  command: git config --global --add safe.directory "{{ app_dir }}"
+  shell: git config --global --add safe.directory "{{ app_dir }}"
 
 - name: Clone the PHP project repo
   git: 
@@ -20,7 +20,7 @@
     group: hng
     mode: '0755'
   
-- name: Switch to the golang app directory
+- name: Switch to the php app directory
   command: chdir="{{ app_dir }}" ls
 
 - name: copy .env file to the app directory
