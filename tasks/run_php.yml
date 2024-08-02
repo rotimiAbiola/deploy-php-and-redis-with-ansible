@@ -5,18 +5,19 @@
     - php artisan key:generate --force
     - php artisan config:cache
     - php artisan config:clear
+  become_user: hng
 
 - name: Run artisan migrate
-  become: true
   shell: >
     php artisan migrate:fresh --force
+  become_user: hng
 
 - name: Run seed migrate
-  become: true
   shell: >
     php artisan migrate --seed --force
+  become_user: hng
 
 - name: Run artisan serve
-  become: true
   shell: >
     php artisan serve
+  become_user: hng
