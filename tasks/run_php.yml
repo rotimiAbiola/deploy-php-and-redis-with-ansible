@@ -13,7 +13,6 @@
     chdir="{{ app_dir }}"
   register: migrate_result
   become_user: hng
-  failed_when: migrate_result.rc != 0 and "'already exists' not in migrate_result.stderr
 
 - name: Display artisan migrate result
   debug:
