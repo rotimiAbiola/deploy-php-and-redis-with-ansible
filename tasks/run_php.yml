@@ -26,7 +26,7 @@
 
 - name: Run artisan serve
   shell: >
-    php artisan serve
+    nohup php artisan serve --host=0.0.0.0 --port=3000 > {{ app_dir }}/storage/logs/artisan_serve.log 2>&1 &
     chdir={{ app_dir }}
   become_user: hng
 

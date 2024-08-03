@@ -21,6 +21,6 @@
 
     - include_tasks: tasks/run_php.yml
 
-    - include_tasks: tasks/firewall.yml
+    - include_tasks: tasks/setup_firewall.yml
     
     - include_tasks: tasks/setup_nginx.yml

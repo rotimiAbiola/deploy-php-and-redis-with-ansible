@@ -1,6 +1,6 @@
 ---
 - name: Configure Git to add /opt/stage_5b as a safe directory
-  shell: git config --global --add safe.directory "{{ app_dir }}"
+  shell: "git config --global --add safe.directory {{/opt/stage_5b}}"
 
 - name: Clone the PHP project repo
   git: 
